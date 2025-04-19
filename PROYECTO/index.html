@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Bienvenida</title>
+  <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+  <div class="background">
+    <button id="welcomeBtn">BIENVENIDA</button>
+
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Iniciar sesión</h2>
+        <form id="loginForm">
+          <label for="username">Usuario:</label>
+          <input type="text" id="username" name="username" required>
+          
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required>
+          
+          <button type="submit">Entrar</button>
+          <div id="error" class="error"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("loginModal");
+    const btn = document.getElementById("welcomeBtn");
+    const span = document.getElementsByClassName("close")[0];
+    const form = document.getElementById("loginForm");
+    const error = document.getElementById("error");
+
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      const usuario = document.getElementById("username").value;
+      const contrasena = document.getElementById("password").value;
+
+      if (usuario === "love" && contrasena === "love") {
+        window.location.href = "amor.html"; //  otra página
+      } else {
+        error.textContent = "Usuario o contraseña incorrectos.";
+      }
+    }
+  </script>
+</body>
+</html>

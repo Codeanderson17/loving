@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Ti 💛</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: url('img/girasoloresback.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .fondo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('img/background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      filter: brightness(60%); /* Fondo más oscuro */
+      z-index: -2;
+    }
+
+    .girasol {
+      position: absolute;
+      width: 60px;
+      cursor: pointer;
+      animation: flotar 10s linear forwards;
+      z-index: 1;
+    }
+
+    .frase {
+      position: absolute;
+      color: white;
+      font-size: 70px;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
+      animation: aparecer 3s forwards;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    @keyframes flotar {
+      0% {
+        top: 100vh;
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+      100% {
+        top: -100px;
+        opacity: 0;
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes aparecer {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo oscuro -->
+  <div class="fondo"></div>
+
+  <!-- Música automática -->
+<!-- Música automática con controles visibles -->
+<audio id="audio" autoplay loop controls style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10;">
+  <source src="Fuerza Regida - POR ESOS OJOS  Vídeo con letra - Hot Gravity (mp3cut.net) (1).mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
+</audio>
+  <script>
+    const frases = [
+      "Eres mi todo 💖",
+      "Amarte es mi fortuna ✨",
+      "Tu sonrisa ilumina mi alma 🌟",
+      "Siempre tú, en todo momento 💘",
+      "Contigo, cada día es especial 🌻",
+      "Te amo más de lo que imaginas 💌",
+      "Contigo, todo tiene sentido.🌻",
+      "Eres mi lugar favorito💘.",
+      "El amor empieza con un 'clic'... como este.💘",
+      "Donde sea, pero contigo💘.",
+      "Tu amor es mi contraseña secreta.✨",
+      "Desde que llegaste, todo cambió de color.🌻",
+      "No es magia, es amor.✨",
+      "Si estás aquí, mi corazón ya se siente en casa.🌻",
+      "Amar es entrar sin miedo... como tú lo haces ahora✨.",
+      "Bienvenido a este rincón que solo tú puedes desbloquear.🌻"
+    ];
+
+    let indexFrase = 0;
+
+    function crearGirasol() {
+      const girasol = document.createElement('img');
+      girasol.src = 'girasol.png';
+      girasol.className = 'girasol';
+      girasol.style.left = Math.random() * 90 + 'vw';
+      girasol.style.top = '100vh';
+      document.body.appendChild(girasol);
+
+      // Frase flotante en una posición aleatoria
+      const frase = document.createElement('div');
+      frase.className = 'frase';
+      frase.textContent = frases[indexFrase];
+
+      // Posiciones aleatorias en la pantalla
+      frase.style.left = Math.random() * 80 + 'vw';
+      frase.style.top = Math.random() * 70 + 'vh';
+      document.body.appendChild(frase);
+
+      // Siguiente frase (reiniciar si se acaba)
+      indexFrase = (indexFrase + 1) % frases.length;
+
+      // Eliminar girasol y frase al terminar la animación
+      girasol.addEventListener('animationend', () => {
+        girasol.remove();
+      });
+
+      frase.addEventListener('animationend', () => {
+        frase.remove();
+      });
+    }
+
+    // Crear girasoles y frases infinitamente
+    setInterval(crearGirasol, 1500);
+  </script>
+</body>
+</html>
